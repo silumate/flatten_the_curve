@@ -37,6 +37,7 @@ export default {
     msg: String
   }
 }
+const x = 0
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
