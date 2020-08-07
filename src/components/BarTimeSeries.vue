@@ -39,7 +39,7 @@ export default {
         .append("g")
         .attr("transform", `translate(${margin}, ${margin})`)
 
-      const maxY = _.maxBy(series_val, "infected").infected
+      const maxY = _.maxBy(series_val, "total_infected").total_infected
 
       const yScale = d3
         .scaleLinear()
@@ -75,8 +75,8 @@ export default {
         .append("rect")
         .attr("class", "bar")
         .attr("x", o => xScale(o.day))
-        .attr("y", o => yScale(o.infected))
-        .attr("height", o => chart_height - yScale(o.infected))
+        .attr("y", o => yScale(o.total_infected))
+        .attr("height", o => chart_height - yScale(o.total_infected))
         .attr("width", barWidth)
         .on("mouseenter", function(actual, i) {
           d3.select(this)
@@ -87,14 +87,14 @@ export default {
             .append("text")
             .attr("class", "value")
             .attr("x", o => xScale(o.day) + barWidth / 2)
-            .attr("y", o => yScale(o.infected) - 20)
+            .attr("y", o => yScale(o.total_infected) - 20)
             .attr("text-anchor", "middle")
             .text((o, idx) => {
-              return idx !== i ? "" : `${o.day.formatMMDD()} - ${o.infected} infected`;
+              return idx !== i ? "" : `${o.day.formatMMDD()} - ${o.total_infected} total_infected`;
             })
         })
         .on("mouseleave", function() {
-          d3.selectAll(".infected").attr("opacity", 1)
+          d3.selectAll(".total_infected").attr("opacity", 1)
 
           d3.select(this)
             .transition()
@@ -113,7 +113,7 @@ export default {
         .attr("y", 12)
         .attr("transform", "rotate(-90)")
         .attr("text-anchor", "middle")
-        .text("Infected")
+        .text("total_infected")
 
       svg
         .append("text")
@@ -121,7 +121,7 @@ export default {
         .attr("x", chart_width / 2 + margin)
         .attr("y", 40)
         .attr("text-anchor", "middle")
-        .text("All who are and were infected")
+        .text("All who are and were total_infected")
     }
   }
 };
